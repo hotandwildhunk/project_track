@@ -1,0 +1,5 @@
+<h1>Edit Salesagent</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.salesagent_path(@conn, :update, @salesagent)) %>
+
+<span><%= link "Back", to: Routes.salesagent_path(@conn, :index) %></span>

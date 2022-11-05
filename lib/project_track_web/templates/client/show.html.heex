@@ -1,0 +1,28 @@
+<h1>Show Client</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @client.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @client.last_name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @client.email %>
+  </li>
+
+  <li>
+    <strong>Sales Agent:</strong>
+    <%= @client.salesagent.first_name %> <%= @client.salesagent.last_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.client_path(@conn, :edit, @client) %></span> |
+<span><%= link "Back", to: Routes.client_path(@conn, :index) %></span>

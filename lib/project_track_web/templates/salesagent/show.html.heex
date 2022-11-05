@@ -1,0 +1,23 @@
+<h1>Show Salesagent</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @salesagent.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @salesagent.last_name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @salesagent.email %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.salesagent_path(@conn, :edit, @salesagent) %></span> |
+<span><%= link "Back", to: Routes.salesagent_path(@conn, :index) %></span>

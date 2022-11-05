@@ -1,0 +1,30 @@
+<h1>Listing Salesagents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for salesagent <- @salesagents do %>
+    <tr>
+      <td><%= salesagent.first_name %></td>
+      <td><%= salesagent.last_name %></td>
+      <td><%= salesagent.email %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.salesagent_path(@conn, :show, salesagent) %></span>
+        <span><%= link "Edit", to: Routes.salesagent_path(@conn, :edit, salesagent) %></span>
+        <span><%= link "Delete", to: Routes.salesagent_path(@conn, :delete, salesagent), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Salesagent", to: Routes.salesagent_path(@conn, :new) %></span>
