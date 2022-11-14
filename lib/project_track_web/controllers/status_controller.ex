@@ -4,6 +4,10 @@ defmodule ProjectTrackWeb.StatusController do
   alias ProjectTrack.Statuses
   alias ProjectTrack.Statuses.Status
 
+  import ProjectTrackWeb.UserAuth, only: [require_authenticated_user: 2]
+
+  plug :require_authenticated_user when action not in [:index, :show]
+
   def index(conn, _params) do
     statuses = Statuses.list_statuses()
     render(conn, "index.html", statuses: statuses)

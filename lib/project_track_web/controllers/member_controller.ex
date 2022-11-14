@@ -4,6 +4,10 @@ defmodule ProjectTrackWeb.MemberController do
   alias ProjectTrack.Members
   alias ProjectTrack.Members.Member
 
+  import ProjectTrackWeb.UserAuth, only: [require_authenticated_user: 2]
+
+  plug :require_authenticated_user when action not in [:index, :show]
+
   def index(conn, _params) do
     members = Members.list_members()
     teams = Members.list_teams()

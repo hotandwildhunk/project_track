@@ -4,6 +4,10 @@ defmodule ProjectTrackWeb.SalesagentController do
   alias ProjectTrack.Salesagents
   alias ProjectTrack.Salesagents.Salesagent
 
+  import ProjectTrackWeb.UserAuth, only: [require_authenticated_user: 2]
+
+  plug :require_authenticated_user when action not in [:index, :show]
+
   def index(conn, _params) do
     salesagents = Salesagents.list_salesagents()
     render(conn, "index.html", salesagents: salesagents)

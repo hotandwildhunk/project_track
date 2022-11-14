@@ -4,12 +4,18 @@ defmodule ProjectTrackWeb.ProjectController do
   alias ProjectTrack.Projects
   alias ProjectTrack.Projects.Project
 
-  def index(conn, _params) do
-    projects = Projects.list_projects()
+  import ProjectTrackWeb.UserAuth, only: [require_authenticated_user: 2]
+
+  plug :require_authenticated_user when action not in [:index, :show]
+
+  def index(conn, params) do
+    search = Projects.search(params)
+    projects = Projects.list_projects(params)
     teams = Projects.list_teams()
     clients = Projects.list_clients()
     statuses = Projects.list_statuses()
     conn
+    |> assign(:search, search)
     |> assign(:projects, projects)
     |> assign(:teams, teams)
     |> assign(:clients, clients)

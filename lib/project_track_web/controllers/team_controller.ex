@@ -4,6 +4,10 @@ defmodule ProjectTrackWeb.TeamController do
   alias ProjectTrack.Teams
   alias ProjectTrack.Teams.Team
 
+  import ProjectTrackWeb.UserAuth, only: [require_authenticated_user: 2]
+
+  plug :require_authenticated_user when action not in [:index, :show]
+
   def index(conn, _params) do
     teams = Teams.list_teams()
     render(conn, "index.html", teams: teams)

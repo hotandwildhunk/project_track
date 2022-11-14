@@ -1,5 +1,19 @@
 <h1>Listing Projects</h1>
 
+<%= form_for @conn, Routes.project_path(@conn, :index), [method: :get, class: "search-frm"], fn f -> %>
+  <%= search_input f, :search, placeholder: "Search..." %>
+	<%= submit "Filter" %>
+<% end %>
+
+<%= if @projects.page_number > 1 do %>
+<%= link "Prev", to: Routes.project_path(@conn, :index, search: @search, page: @projects.page_number - 1) %>
+<%= end %>
+<%= if @projects.page_number > 1 && @projects.page_number < @projects.total_pages do %>
+ &nbsp; | &nbsp;
+<%= end %>
+<%= if @projects.page_number < @projects.total_pages do %>
+<%= link "Next", to: Routes.project_path(@conn, :index, search: @search, page: @projects.page_number + 1) %>
+<%= end %>
 <table>
   <thead>
     <tr>

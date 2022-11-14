@@ -4,6 +4,10 @@ defmodule ProjectTrackWeb.ClientController do
   alias ProjectTrack.Clients
   alias ProjectTrack.Clients.Client
 
+  import ProjectTrackWeb.UserAuth, only: [require_authenticated_user: 2]
+
+  plug :require_authenticated_user when action not in [:index, :show]
+
   def index(conn, _params) do
     clients = Clients.list_clients()
     salesagents = Clients.list_salesagents()

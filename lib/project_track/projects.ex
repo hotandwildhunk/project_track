@@ -20,12 +20,30 @@ defmodule ProjectTrack.Projects do
       [%Project{}, ...]
 
   """
-  def list_projects do
+  def list_projects(params) do
+    search_term = search(params)
     Project
-    |> Repo.all()
-    |> Repo.preload(:team)
-    |> Repo.preload(:client)
-    |> Repo.preload(:status)
+    |> list_projects_by_search(search_term)
+    |> order_by(asc: :title)
+    |> preload(:team)
+    |> preload(:client)
+    |> preload(:status)
+    |> Repo.paginate(params)
+  end
+
+  def search(params) do
+    get_in(params, ["search"])
+  end
+
+  def list_projects_by_search(query, search_term) when is_nil(search_term) or byte_size(search_term) == 0 do
+    query
+  end
+
+  def list_projects_by_search(query, search_term) do
+    wildcard_search = "%#{search_term}%"
+    from project in query,
+      where: ilike(project.title, ^wildcard_search),
+      or_where: ilike(project.description, ^wildcard_search)
   end
 
   @doc """
