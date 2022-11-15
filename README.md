@@ -4,8 +4,7 @@ This is a simple app using Elixir + Phoenix to demostrate relational database, C
 
 ## Version
 
-Elixir Version 1.12
-Phonix Version 1.6.12
+Elixir Version 1.12 and Phonix Version 1.6.12
 
 To start your Phoenix server:
 
