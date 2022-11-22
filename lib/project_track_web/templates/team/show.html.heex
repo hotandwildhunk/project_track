@@ -13,6 +13,12 @@
   </li>
 
 </ul>
+<h2>Members</h2>
+<ul>
+<%= for member <- @team.member do %>
+<li><%= member.first_name %> <%= member.last_name %></li>
+<% end %>
+</ul>
 
 <span><%= link "Edit", to: Routes.team_path(@conn, :edit, @team) %></span> |
 <span><%= link "Back", to: Routes.team_path(@conn, :index) %></span>

@@ -35,7 +35,11 @@ defmodule ProjectTrack.Teams do
       ** (Ecto.NoResultsError)
 
   """
-  def get_team!(id), do: Repo.get!(Team, id)
+  def get_team!(id) do
+    Team
+    |> Repo.get!(id)
+    |> Repo.preload(:member)
+  end
 
   @doc """
   Creates a team.
